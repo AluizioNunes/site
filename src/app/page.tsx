@@ -383,19 +383,21 @@ export default function Home() {
           title="Tecnologia validada em campo"
           subtitle="Trabalhamos com parceiros líderes para entregar segurança e performance."
         >
-          <div className="relative overflow-hidden rounded-3xl border border-card-border bg-card py-8 backdrop-blur">
+          <div className="relative overflow-hidden py-2">
             <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
-            <div className="partners-marquee flex w-max items-center gap-10 px-10">
+            <div className="partners-marquee flex w-max items-center gap-12 px-2">
               {[...partners, ...partners].map(({ name, logo }, index) => (
                 <div
                   key={`${name}-${index}`}
-                  className="flex h-20 w-56 items-center justify-center rounded-2xl border border-card-border bg-black/25 px-6"
+                  className="relative h-24 w-72 shrink-0"
                 >
                   <Image
                     src={logo}
                     alt={name}
-                    className="h-10 w-auto object-contain opacity-90 grayscale transition hover:opacity-100 hover:grayscale-0"
+                    fill
+                    sizes="288px"
+                    className="object-contain opacity-95 transition hover:opacity-100"
                     draggable={false}
                   />
                 </div>
