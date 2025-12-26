@@ -14,14 +14,18 @@ function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+function badRequest(error: string, details?: Record<string, unknown>) {
+  return NextResponse.json(
+    { ok: false, error, details },
+    { status: 400 },
+  );
+}
+
 export async function POST(req: Request) {
   const body = (await req.json().catch(() => null)) as Payload | null;
 
   if (!body) {
-    return NextResponse.json(
-      { error: "Payload inválido." },
-      { status: 400 },
-    );
+    return badRequest("Payload inválido.");
   }
 
   const name = String(body.name || "").trim();
@@ -30,21 +34,25 @@ export async function POST(req: Request) {
   const message = String(body.message || "").trim();
 
   if (!name || !email || !message) {
-    return NextResponse.json(
-      { error: "Preencha nome, email e mensagem." },
-      { status: 400 },
-    );
+    return badRequest("Preencha nome, email e mensagem.", {
+      missing: {
+        name: !name,
+        email: !email,
+        message: !message,
+      },
+    });
   }
 
   if (!isEmail(email)) {
-    return NextResponse.json({ error: "Email inválido." }, { status: 400 });
+    return badRequest("Email inválido.", { field: "email" });
   }
 
-  if (message.length < 10) {
-    return NextResponse.json(
-      { error: "Mensagem muito curta." },
-      { status: 400 },
-    );
+  if (message.length < 3) {
+    return badRequest("Mensagem muito curta.", {
+      field: "message",
+      minLength: 3,
+      messageLength: message.length,
+    });
   }
 
   const missingEnv = [
