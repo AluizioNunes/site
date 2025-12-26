@@ -5,6 +5,16 @@ import { useId, useMemo, useState } from "react";
 
 type SubmitState = "idle" | "sending" | "success" | "error";
 
+type ErrorBody = {
+  error?: string;
+  details?: {
+    code?: string;
+    responseCode?: number;
+    command?: string;
+    message?: string;
+  };
+};
+
 export default function ContactForm() {
   const [state, setState] = useState<SubmitState>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -38,10 +48,11 @@ export default function ContactForm() {
       });
 
       if (!res.ok) {
-        const body = (await res.json().catch(() => null)) as
-          | { error?: string }
-          | null;
-        throw new Error(body?.error || "Não foi possível enviar agora.");
+        const body = (await res.json().catch(() => null)) as ErrorBody | null;
+        const details = formatErrorDetails(body?.details);
+        throw new Error(
+          `${body?.error || "Não foi possível enviar agora."}${details ? ` ${details}` : ""}`,
+        );
       }
 
       setState("success");
@@ -136,3 +147,10 @@ export default function ContactForm() {
   );
 }
 
+function formatErrorDetails(details: ErrorBody["details"]) {
+  if (!details) return null;
+  const chunks = [details.code, details.responseCode, details.command]
+    .filter((value) => value !== undefined && value !== null && String(value).trim().length > 0)
+    .map((value) => String(value).trim());
+  return chunks.length > 0 ? `(${chunks.join(" / ")})` : null;
+}
