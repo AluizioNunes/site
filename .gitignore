@@ -23,6 +23,9 @@
 # misc
 .DS_Store
 *.pem
+ITFACT.jpg
+n_gage.zip
+/n_gage/
 
 # debug
 npm-debug.log*
