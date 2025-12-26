@@ -66,7 +66,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const to = process.env.CONTACT_TO || "contatos@itfact.com.br";
+  const to = process.env.CONTACT_TO || "contatos@itfact.com";
   const host = process.env.SMTP_HOST!;
   const port = Number(process.env.SMTP_PORT);
   const user = process.env.SMTP_USER!;
