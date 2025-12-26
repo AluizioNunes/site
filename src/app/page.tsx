@@ -367,9 +367,9 @@ export default function Home() {
               </div>
               <a
                 className="mt-7 inline-flex h-11 w-full items-center justify-center rounded-full border border-card-border bg-black/30 px-6 text-sm font-semibold text-foreground transition hover:bg-white/10"
-                href="mailto:contato@itfact.com.br?subject=Contato%20-%20ITFACT"
+                href="mailto:contatos@itfact.com.br?subject=Contato%20-%20ITFACT"
               >
-                contato@itfact.com.br
+                contatos@itfact.com.br
               </a>
             </div>
             <div className="lg:col-span-7">
