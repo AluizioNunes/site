@@ -149,8 +149,19 @@ export default function ContactForm() {
 
 function formatErrorDetails(details: ErrorBody["details"]) {
   if (!details) return null;
-  const chunks = [details.code, details.responseCode, details.command]
+  const base = [details.code, details.responseCode, details.command]
     .filter((value) => value !== undefined && value !== null && String(value).trim().length > 0)
     .map((value) => String(value).trim());
-  return chunks.length > 0 ? `(${chunks.join(" / ")})` : null;
+
+  const message =
+    typeof details.message === "string" && details.message.trim().length > 0
+      ? details.message.trim()
+      : null;
+
+  const chunks = [
+    base.length > 0 ? `(${base.join(" / ")})` : null,
+    message ? message.slice(0, 180) : null,
+  ].filter(Boolean);
+
+  return chunks.length > 0 ? `- ${chunks.join(" ")}` : null;
 }
