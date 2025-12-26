@@ -3,6 +3,7 @@
 import Logo from "@/components/logo";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 type NavItem = { label: string; href: string };
@@ -43,10 +44,22 @@ export default function SiteHeader() {
 
         <nav className="hidden items-center gap-6 text-sm text-muted md:flex">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="hover:text-foreground">
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="uppercase tracking-wide hover:text-foreground"
+            >
               {item.label}
             </a>
           ))}
+          <Link
+            href="/login"
+            onClick={() => setOpen(false)}
+            className="uppercase tracking-wide hover:text-foreground"
+          >
+            Logar
+          </Link>
           <a
             href="#contato"
             className="inline-flex h-10 items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-black transition hover:opacity-90"
@@ -81,13 +94,22 @@ export default function SiteHeader() {
                     <a
                       key={item.href}
                       href={item.href}
+                      onClick={() => setOpen(false)}
                       className="rounded-2xl border border-card-border bg-card px-4 py-3 text-sm font-semibold text-foreground backdrop-blur"
                     >
-                      {item.label}
+                      <span className="uppercase tracking-wide">{item.label}</span>
                     </a>
                   ))}
+                  <Link
+                    href="/login"
+                    onClick={() => setOpen(false)}
+                    className="rounded-2xl border border-card-border bg-card px-4 py-3 text-sm font-semibold text-foreground backdrop-blur"
+                  >
+                    <span className="uppercase tracking-wide">Logar</span>
+                  </Link>
                   <a
                     href="#contato"
+                    onClick={() => setOpen(false)}
                     className="mt-2 inline-flex h-11 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-black"
                   >
                     Falar com especialista
