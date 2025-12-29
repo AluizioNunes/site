@@ -3,8 +3,10 @@ import ContactForm from "@/components/contact-form";
 import Section from "@/components/section";
 import SiteFooter from "@/components/site-footer";
 import SiteHeader from "@/components/site-header";
-import fortinetLogo from "@/assets/images/Fortinet - Logo.jpg";
+import fortinetLogo from "@/assets/images/fortinet-logo.svg";
 import nutanixLogo from "@/assets/images/Nutanix.png";
+import dockerLogo from "@/assets/images/docker-mark-blue.png";
+import githubLogo from "@/assets/images/github-mark-white.png";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -21,6 +23,8 @@ export default function Home() {
   const partners = [
     { name: "Fortinet", logo: fortinetLogo },
     { name: "Nutanix", logo: nutanixLogo },
+    { name: "Docker", logo: dockerLogo },
+    { name: "GitHub", logo: githubLogo },
   ];
 
   return (
