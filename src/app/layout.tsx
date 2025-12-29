@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "@/components/theme-provider";
 import { geistMono, geistSans, nGage } from "@/app/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  verification: {
+    other: {
+      "facebook-domain-verification": "b9lb9yxk0zf8ot8ictu10moo5auhm8",
+    },
+  },
   title: {
     default: "ITFACT | IT Solutions",
     template: "%s | ITFACT",
