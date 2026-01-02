@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   verification: {
     other: {
       "facebook-domain-verification": "b9lb9yxk0zf8ot8ictu10moo5auhm8",
+      "twilio-domain-verification": "646e417018f04b923266b490bb08b2a5",
     },
   },
   title: {
